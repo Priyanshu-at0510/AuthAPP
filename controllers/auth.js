@@ -92,9 +92,7 @@ exports.login=async (req,res)=>{
                                });
 
             user.token=token;
-            
             user.password=undefined;
-            
             //now create a cookie
             const options={
                 expires: new Date(Date.now()+3*24*60*60*1000),
