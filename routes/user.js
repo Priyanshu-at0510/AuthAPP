@@ -6,7 +6,7 @@ const router=express.Router();
 const {login,signup}=require("../controllers/auth");
 //map the path 
 
-// router.post("/login",login);
+router.post("/login",login);
 router.post("/signup",signup);
 
 
