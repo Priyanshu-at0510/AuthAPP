@@ -8,7 +8,7 @@ exports.auth=(req,res,next)=>{
         //extract JWT token
         //PENDING:other ways to fetch token
         console.log("body",req.body.token);
-        console.log("cookie",req.cookie.token);
+        console.log("cookie",req.cookies.token);
         // console.log("header",req.header("Authorization").replace("Bearer ",""));
         const token=req.body.token || req.cookie.token || req.header("Authorization").replace("Bearer ","");
         if(!token || token===undefined){
@@ -20,10 +20,11 @@ exports.auth=(req,res,next)=>{
         //verify the token
         try{
             const payload=jwt.verify(token,process.env.JWT_SECRET);
-            console.log(payload);
+            console.log(payload)
 
             req.user=payload; //req ke andar es payload ko store kar lenge
         }catch(err){
+            console.log(err)
             return res.status(401).json({
                 success:false,
                 message:"Token is Invalid",
