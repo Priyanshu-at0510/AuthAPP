@@ -7,8 +7,11 @@ exports.auth=(req,res,next)=>{
     try {
         //extract JWT token
         //PENDING:other ways to fetch token
-        const token=req.body.token;
-        if(!token){
+        console.log("body",req.body.token);
+        console.log("cookie",req.cookie.token);
+        // console.log("header",req.header("Authorization").replace("Bearer ",""));
+        const token=req.body.token || req.cookie.token || req.header("Authorization").replace("Bearer ","");
+        if(!token || token===undefined){
             return res.status(401).json({
                 success:false,
                 message:"Token Missing"
@@ -61,7 +64,7 @@ exports.isAdmin=(req,res,next)=>{
                 message:"This is a protected route for Admin"
                })
         }
-        
+        next();
     } catch (error) {
         return res.status(500).json({
             success:false,

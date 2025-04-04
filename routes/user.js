@@ -24,13 +24,13 @@ router.get("/student",auth,isStudent,(req,res)=>{
         message:"Welcome to the protected route of students",
     });
 });
+
 router.get("/admin",auth,isAdmin,(req,res)=>{
     res.json({
         success:true,
         message:"Welcome to the protected route of Admin"
     });
 });
-
 
 
 module.exports=router;
